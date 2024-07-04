@@ -16,3 +16,9 @@ function acessar(){
     }
 
 }
+
+//FUNÇÃO PARA ARMAZENAMENTO DEN NOMES EM ARRAY
+var dadosLista = [];
+function salvarUser(){
+    
+}
