@@ -24,9 +24,20 @@ function salvarUser(){
 
     if(nomeUser){
         dadosLista.push(nomeUser);
-        console.log(dadosLista);
+        //console.log(dadosLista);
+        criaLista()
+        document.getElementById('nomeUser').value = "";
 
     }else{
        alert("Favor informe um nome para cadastro");
     }
+}
+// FUNÇÃO QUE CRIA LISTA DE USUÁRIOS
+function criaLista(){
+    let tabela = document.getElementById('tabela').innerHTML = "<tr><th>Nome Usúario</th><th>Ações</th></tr>";
+    for(let i=0;i <= (dadosLista.length - 1);i++){
+        tabela += "<tr><td>" + dadosLista[i] + "</td><td></td></tr>";
+        document.getElementById('tabela').innerHTML = tabela;
+    }
+
 }
