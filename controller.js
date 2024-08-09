@@ -46,7 +46,7 @@ function criaLista(){
 
 }
 
-//FUNÇÃO PARA EDITAR NOMES NA LISTA DE US
+//FUNÇÃO PARA EDITAR NOMES NA LISTA DE USUÁRIO
 function editar(i){
     // DEFINE O VALOR DO CAMPO 'nomeUser' COM O NOME SELECIONADO 
     document.getElementById('nomeUser').value = dadosLista [(i - 1)];
