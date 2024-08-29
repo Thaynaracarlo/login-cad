@@ -11,19 +11,27 @@
 </head>
 <body>
     <div class="container">
+        <form action="">
         <label for="">Nome:</label>
         <input type="text" name="" class="form-control" id="nomeUser">
+
+        <label for="">E-mail:</label>
+        <input type="text" name="emailcad" class="form-control" id="emailUser">
+        
         <br>
         <button class=" btn btn-success" type="button" onclick="salvarUser()">SALVAR</button>
     </div>
+</form>
     <div class="container">
         <table class="table table-striped" id="tabela">
             <tr>
                 <th>Nome Usuário</th>
+                <th>Email</th>
                 <th>Ações</th>
             </tr>
         </table>
     </div>
+
     
     <script src='controller.js'></script>
 </body>

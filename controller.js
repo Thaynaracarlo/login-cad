@@ -20,16 +20,23 @@ function acessar(){
 
 }
 
-// FUNÇÃO PARA ADICIONAR NOMES A UM ARRAY E EXIBIR  O ARRAY ATUALIZADO
+// FUNÇÃO PARA ADICIONAR NOMES A UM ARRAY E EXIBIR O ARRAY ATUALIZADO
 var dadosLista = [];
+var emailLista = [];
 function salvarUser(){
     let nomeUser = document.getElementById ('nomeUser').value;
-
-    if(nomeUser){
+    let emailUser = document.getElementById ('emailUser').value;
+    
+    if(document.forms[0].emailcad.value == "" || document.forms[0].emailcad.value.indexOf('@') == -1 || document.forms[0].emailcad.value.indexOf('.') == -1){
+    alert("Informe seu email corretamente");
+    }
+    else if(nomeUser){
         dadosLista.push(nomeUser);
+        emailLista.push(emailUser);
         //console.log(dadosLista);
         criaLista()
         document.getElementById('nomeUser').value = "";
+        document.getElementById('emailUser').value = "";
     }else{
        alert("Favor informe um nome para cadastro");
     }
@@ -37,10 +44,12 @@ function salvarUser(){
 
 // FUNÇÃO PARA GERAR UMA TABELA DE USUÁRIOS COM OPÇÕES DE EDIÇÃO E EXCLUSÃO 
 function criaLista(){
+
+    
     // INICIALIZA A TABELA COM CABEÇALHOS
-    let tabela = document.getElementById('tabela').innerHTML = "<tr><th>Nome Usúario</th><th>Ações</th></tr>";
+    let tabela = document.getElementById('tabela').innerHTML = "<tr><th>Nome Usúario</th><th>Email</th><th>Ações</th></tr>";
     for(let i=0;i <= (dadosLista.length - 1);i++){
-        tabela += "<tr><td>" + dadosLista[i] + "</td><td><button type='button' onclick='editar(parentNode.parentNode.rowIndex)'>Editar</button><button type='button' onclick='excluir(parentNode.parentNode.rowIndex)'>Excluir</button></td></tr>";
+        tabela += "<tr><td>" + dadosLista[i] + "</td><td>" + emailLista[i] + "</td><td><button type='button' onclick='editar(parentNode.parentNode.rowIndex)'>Editar</button><button type='button' onclick='excluir(parentNode.parentNode.rowIndex)'>Excluir</button></td></tr>";
         document.getElementById('tabela').innerHTML = tabela;
     }
 
@@ -50,8 +59,10 @@ function criaLista(){
 function editar(i){
     // DEFINE O VALOR DO CAMPO 'nomeUser' COM O NOME SELECIONADO 
     document.getElementById('nomeUser').value = dadosLista [(i - 1)];
+    document.getElementById('emailUser').value = emailLista [(i - 1)];
     // REMOVE O NOME SELECIONADO  DA LISTA  DE DADOS
     dadosLista.splice(dadosLista[(i - 1)], 1);
+    emailLista.splice(emailLista[(i - 1)], 1);
 
 }
 
@@ -59,6 +70,7 @@ function editar(i){
 function excluir(i){
     // REMOVE O NOME DO ARRAY DADOSLISTA NO ÍNDICE QUE É FORNECIDO
     dadosLista.splice((i -1), 1);
+    emailLista.splice((i -1), 1);
     // ATUALIZA A TABELA PARA REFLETIR A REMOÇÃO
     document.getElementById('tabela').deleteRow(i)
 }
