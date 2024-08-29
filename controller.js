@@ -1,75 +1,94 @@
-//  FUNÇÃO INICIAL DE VALIDAÇÃO DE ACESSO 
-function acessar() {
-    // OBTÉM O VALOR DO CAMPO DE E-MAIL
-    let loginEmail = document.getElementById('loginEmail').value;
-    //  OBTÉM O VALOR DO CAMPO DE SENHA 
-    let loginSenha = document.getElementById('loginSenha').value;
-
-    // VERIFICA SE ALGUM DOS CAMPOS ESTÁ VAZIO 
-    if (!loginEmail || !loginSenha) {
-        alert("Favor preencher todos os campos");
+// VALIDAR ACESSO EM TELA DE LOGIN
+function acessar() { // CRIA UMA FUNÇÃO  QUE VALIDA O QUE FOI ESCRITO NOS CAMPOS DE LOGIN
+    let loginSenha = document.getElementById("loginSenha").value;
+   
+    if (document.forms[0].email.value == "" ||
+        document.forms[0].email.value.indexOf('@') == -1 ||
+        document.forms[0].email.value.indexOf('.') == -1) {
+       // Mostra mensagem dentro da div 'span" caso usuário não preencha corretamente os campos de Login.
+        document.getElementById("span").innerHTML = "Por favor preencha seu email. Ex: @dominio.com";
+    }else if(!loginSenha){
+        document.getElementById("span").innerHTML = "Por favor preencha sua senha.";
     } else {
-        window.location.href ="cadastro.html";
-        // EXIBE UM ALERTA DE SUCESSO SE AMBOS OS CAMPOS ESTIVEREM PRENCHIDOS
-
-        // alert("campos preenchidos com sucesso");
-
-
+        window.location.href = "cadastro.html"
+ 
     }
-
 }
-
-// FUNÇÃO PARA ADICIONAR NOMES A UM ARRAY E EXIBIR O ARRAY ATUALIZADO
-var dadosLista = [];
-var emailLista = [];
+ 
+ 
+ 
+ 
+var userLista = []; //Array Usuarios
+var emaillista = [];// Array email
+var alert = document.getElementById("alert"); // Mensagem de Span, variavel utilizada nas funcões salvarUser e editar
+var h6 = document.getElementById("text");
+// FUNÇÃO QUE ARMAZENA EM ARRAY NOME NA TELA DE CADASTRO
 function salvarUser() {
-    let nomeUser = document.getElementById('nomeUser').value;
-    let emailUser = document.getElementById('emailUser').value;
-
-    if (document.forms[0].emailcad.value == "" || document.forms[0].emailcad.value.indexOf('@') == -1 || document.forms[0].emailcad.value.indexOf('.') == -1) {
-        alert("Informe seu email corretamente");
+    let nomeUser = document.getElementById("nomeUser").value; // Pega valor do input digitado pelo usuário
+    let emailUser = document.getElementById("emailUser").value; // Pega valor do input digitado pelo usuário
+    if (nomeUser) { //Se existe valor digitado pelo user
+ 
+        userLista.push(nomeUser); // Adiciona valor ao array
+        emaillista.push(emailUser);
+        criaLista(); // Inicia a funcão cria lista
+        document.getElementById("nomeUser").value = ""; // Após envio do campo de Login, o input fica vazio
+        document.getElementById("emailUser").value = ""; // Após envio do campo de Login, o input fica vazio
+        alert.innerHTML = ""; //Div onde fica mensagem de aviso fica vazia
+        h6.style.display = "none";
+ 
+ 
+    } else if(emailUser){
+        userLista.push(nomeUser); // Adiciona valor ao array
+        emaillista.push(emailUser);
+        criaLista(); // Inicia a funcão cria lista
+        document.getElementById("nomeUser").value = ""; // Após envio do campo de Login, o input fica vazio
+        document.getElementById("emailUser").value = ""; // Após envio do campo de Login, o input fica vazio
+        alert.innerHTML = ""; //Div onde fica mensagem de aviso fica vazia
+        h6.style.display = "none";
     }
-    else if (nomeUser) {
-        dadosLista.push(nomeUser);
-        emailLista.push(emailUser);
-        //console.log(dadosLista);
-        criaLista()
-        document.getElementById('nomeUser').value = "";
-        document.getElementById('emailUser').value = "";
-    } else {
-        alert("Favor informe um nome para cadastro");
+        else {
+        // alert("Favor informar o nome para cadastro"); // Caso o usuário não preencha o campo ele aparecera um Pop-up para preenchimento completo do cadastro.
+        alert.style.color = "red";
+        alert.innerHTML = "Preencha o formulário de cadastro";
+ 
+ 
+ 
     }
+ 
 }
-
-// FUNÇÃO PARA GERAR UMA TABELA DE USUÁRIOS COM OPÇÕES DE EDIÇÃO E EXCLUSÃO 
+ 
+ 
+// FUNÇÃO QUE CRIA LISTA DE USUÁRIOS
+ 
+// <td> = criar a coluna | <tr> = criar a linha |<th> = cabeçalho da tabela| += = oque estiver dentro da tabela fica, mais adiciona mais algum item há tabela.
+ 
 function criaLista() {
-
-
-    // INICIALIZA A TABELA COM CABEÇALHOS
-    let tabela = document.getElementById('tabela').innerHTML = "<tr><th>Nome Usúario</th><th>Email</th><th>Ações</th></tr>";
-    for (let i = 0; i <= (dadosLista.length - 1); i++) {
-        tabela += "<tr><td>" + dadosLista[i] + "</td><td>" + emailLista[i] + "</td><td><button type='button' onclick='editar(parentNode.parentNode.rowIndex)'>Editar</button><button type='button' onclick='excluir(parentNode.parentNode.rowIndex)'>Excluir</button></td></tr>";
-        document.getElementById('tabela').innerHTML = tabela;
+    let tabelaDesign = document.getElementById("tabela"); //Variável para personalização da tabela
+    // Estrutura da tabela que receberá dados dos usuários
+    let tabela = document.getElementById("tabela").innerHTML = "<tr><th>Nome Usuário</th><th>Email</th><th>Ações</th></tr>";
+    for (let i = 0; i <= (userLista.length - 1); i++) {
+        tabelaDesign.style.backgroundColor = "#ffff";
+        tabela += "<tr><td>" + userLista[i] + "</td><td>" + emaillista[i] + "</td><td><button type='button' onclick='editar(parentNode.parentNode.rowIndex)'>Editar</button><button type='button' onclick='excluir(parentNode.parentNode.rowIndex)'>Excluir</button></td></tr>";
+        document.getElementById("tabela").innerHTML = tabela;
+ 
     }
-
+   
 }
-
-//FUNÇÃO PARA EDITAR NOMES NA LISTA DE USUÁRIO
+ 
+// FUNÇÃO PARA EDITAR NOMES DE LISTA
 function editar(i) {
-    // DEFINE O VALOR DO CAMPO 'nomeUser' COM O NOME SELECIONADO 
-    document.getElementById('nomeUser').value = dadosLista[(i - 1)];
-    document.getElementById('emailUser').value = emailLista[(i - 1)];
-    // REMOVE O NOME SELECIONADO  DA LISTA  DE DADOS
-    dadosLista.splice(dadosLista[(i - 1)], 1);
-    emailLista.splice(emailLista[(i - 1)], 1);
-
+ 
+    document.getElementById("nomeUser").value = userLista[(i - 1)]; userLista.splice(userLista[(i - 1)], 1);
+    document.getElementById("emailUser").value = emaillista[(i - 1)]; emaillista.splice(emaillista[(i - 1)], 1);
+    alert.innerHTML = "";
+ 
 }
-
-/// FUNÇÃO PARA EXCLUIR UM NOME DA LISTA
+ 
+// FUNÇÃO QUE EXCLUI NOME DA LISTA
 function excluir(i) {
-    // REMOVE O NOME DO ARRAY DADOSLISTA NO ÍNDICE QUE É FORNECIDO
-    dadosLista.splice((i - 1), 1);
-    emailLista.splice((i - 1), 1);
-    // ATUALIZA A TABELA PARA REFLETIR A REMOÇÃO
-    document.getElementById('tabela').deleteRow(i)
+    userLista.splice((i - 1), 1);
+    emaillista.splice((i - 1), 1);
+    document.getElementById('tabela').deleteRow(i);
+   
 }
+ 
