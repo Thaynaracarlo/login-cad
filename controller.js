@@ -14,9 +14,7 @@ function acessar() { // CRIA UMA FUNÇÃO  QUE VALIDA O QUE FOI ESCRITO NOS CAMP
  
     }
 }
- 
- 
- 
+
  
 var userLista = []; //Array Usuarios
 var emaillista = [];// Array email
