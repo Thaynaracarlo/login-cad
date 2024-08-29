@@ -87,4 +87,3 @@ function excluir(i) {
     // REMOVE A LINHA CORRESPONDENTE DA TABELA
     document.getElementById('tabela').deleteRow(i);
 }
- 
