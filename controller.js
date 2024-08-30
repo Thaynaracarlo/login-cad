@@ -6,16 +6,14 @@ function acessar() {
     let loginSenha = document.getElementById('loginSenha').value;
  
     // VERIFICA SE AMBOS OS CAMPOS FORAM PREENCHIDOS
-    if (!loginEmail || !loginSenha) {
+    if (loginEmail == "" || loginEmail.indexOf('@') == -1 || loginEmail.indexOf('.') == -1){
+        alert("Favor preencher seu Email corretamente!");
+    }else if (!loginEmail || !loginSenha) {
         // EXIBE UMA MENSAGEM DE ALERTA SE ALGUM CAMPO ESTIVER VAZIO
         alert("Favor preencher todos os campos");
-    }else if(document.forms[0].email.value == "" ||
-        document.forms[0].email.value.indexOf('@') == -1 ||
-        document.forms[0].email.value.indexOf('.') == -1){
-            alert("Favor preencher seu Email corretamente!");
     } else {    
         // EXIBE UMA MENSAGEM DE SUCESSO SE AMBOS OS CAMPOS FORAM PREENCHIDOS
-        alert("Campos preenchidos com sucesso");
+        //alert("Campos preenchidos com sucesso");
         // REDIRECIONA PARA A PÁGINA 'cadastro.html'
         window.location.href = 'cadastro.html';
     }
