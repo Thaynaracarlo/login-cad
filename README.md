@@ -37,16 +37,16 @@ O projeto é composto por dois formulários principais:
 * Clique no botão para salvar o usuário.
 * O nome será adicionado à lista e exibido na tabela. O campo de entrada será limpo.
  
-#### Editar Usuário
+### Editar Usuário
 * Clique no botão "Editar" ao lado do nome que deseja editar.
 * O nome será preenchido no campo de entrada (nomeUser), e o item será removido da lista.
 * Modifique o nome e salve-o novamente se desejar.
  
-#### Excluir Usuário
+### Excluir Usuário
 * Clique no botão "Excluir" ao lado do nome que deseja remover.
 * O nome será removido da lista e da tabela HTML.
 
-# Tecnologias Utilizadas
+## ``Tecnologias Utilizadas``
  
 - *HTML5*: Estrutura do projeto, incluindo os formulários de login e cadastro.
 - *CSS3*: Utilizado para estilizar os formulários e a tabela de visualização dos usuários cadastrados.
